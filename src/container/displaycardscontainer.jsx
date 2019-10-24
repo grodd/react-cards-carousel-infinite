@@ -1,23 +1,20 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
-import Grow from '@material-ui/core/Grow';
+import React from "react";
+import { PropTypes } from "prop-types";
+import Grow from "@material-ui/core/Grow";
 
 function DisplayCardsContainer({ displaycards }) {
   return (
     <div
       style={{
-        display: 'inline-flex',
-        justifyContent: 'center',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        width: '100%',
+        display: "inline-flex",
+        justifyContent: "center",
+        marginLeft: "auto",
+        marginRight: "auto",
+        width: "100%"
       }}
     >
-      {displaycards.map((item) => (
-        <Grow
-          in
-          key={item.id}
-        >
+      {displaycards.map(item => (
+        <Grow in key={item.id}>
           {item.content}
         </Grow>
       ))}
@@ -26,6 +23,6 @@ function DisplayCardsContainer({ displaycards }) {
 }
 
 DisplayCardsContainer.propTypes = {
-  displaycards: PropTypes.arrayOf.isRequired,
+  displaycards: PropTypes.arrayOf.isRequired
 };
 export default DisplayCardsContainer;

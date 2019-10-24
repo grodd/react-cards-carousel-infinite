@@ -1,8 +1,14 @@
-import React from 'react';
+import React from "react";
 import {
-  Card, CardText, CardBody, CardTitle, CardSubtitle, Button, Col,
-} from 'reactstrap';
-import CarouselContainer from '../container/carouselcontainer';
+  Card,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button,
+  Col
+} from "reactstrap";
+import CarouselContainer from "../container/carouselcontainer";
 
 const Fullcards = [
   {
@@ -11,7 +17,7 @@ const Fullcards = [
       <Col xs="2">
         <Card>
           <CardBody>
-            <CardTitle>Manish</CardTitle>
+            <CardTitle>Manish 1</CardTitle>
             <CardSubtitle>Card subtitle</CardSubtitle>
             <CardText>
               Some quick example text to build on the card title and make up the
@@ -21,7 +27,7 @@ const Fullcards = [
           </CardBody>
         </Card>
       </Col>
-    ),
+    )
   },
   {
     id: 2,
@@ -29,7 +35,7 @@ const Fullcards = [
       <Col xs="2">
         <Card>
           <CardBody>
-            <CardTitle>Jacob</CardTitle>
+            <CardTitle>Jacob 2</CardTitle>
             <CardSubtitle>Card subtitle</CardSubtitle>
             <CardText>
               Some quick example text to build on the card title and make up the
@@ -39,7 +45,7 @@ const Fullcards = [
           </CardBody>
         </Card>
       </Col>
-    ),
+    )
   },
   {
     id: 3,
@@ -47,7 +53,7 @@ const Fullcards = [
       <Col xs="2">
         <Card>
           <CardBody>
-            <CardTitle>Jake</CardTitle>
+            <CardTitle>Jake 3</CardTitle>
             <CardSubtitle>Card subtitle</CardSubtitle>
             <CardText>
               Some quick example text to build on the card title and make up the
@@ -57,7 +63,7 @@ const Fullcards = [
           </CardBody>
         </Card>
       </Col>
-    ),
+    )
   },
   {
     id: 4,
@@ -65,7 +71,7 @@ const Fullcards = [
       <Col xs="2">
         <Card>
           <CardBody>
-            <CardTitle>Jack</CardTitle>
+            <CardTitle>Jack 4</CardTitle>
             <CardSubtitle>Card subtitle</CardSubtitle>
             <CardText>
               Some quick example text to build on the card title and make up the
@@ -75,7 +81,7 @@ const Fullcards = [
           </CardBody>
         </Card>
       </Col>
-    ),
+    )
   },
   {
     id: 5,
@@ -83,7 +89,7 @@ const Fullcards = [
       <Col xs="2">
         <Card>
           <CardBody>
-            <CardTitle>Jill</CardTitle>
+            <CardTitle>Jill 5</CardTitle>
             <CardSubtitle>Card subtitle</CardSubtitle>
             <CardText>
               Some quick example text to build on the card title and make up the
@@ -93,7 +99,7 @@ const Fullcards = [
           </CardBody>
         </Card>
       </Col>
-    ),
+    )
   },
   {
     id: 6,
@@ -101,7 +107,7 @@ const Fullcards = [
       <Col xs="2">
         <Card>
           <CardBody>
-            <CardTitle>Julie</CardTitle>
+            <CardTitle>Julie 6</CardTitle>
             <CardSubtitle>Card subtitle</CardSubtitle>
             <CardText>
               Some quick example text to build on the card title and make up the
@@ -111,85 +117,58 @@ const Fullcards = [
           </CardBody>
         </Card>
       </Col>
-    ),
-  },
+    )
+  }
 ];
 
 const styles = {
-  borderRadius: '50%',
-  height: '50%',
+  borderRadius: "50%",
+  height: "50%"
 };
 
 class CarouselController extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startIndex: 0,
-      endIndex: 3,
+      index: 0,
       cards: Fullcards,
-      disabledRight: false,
-      disabledLeft: true,
+      length: Fullcards.length
     };
     this.onClickNext = this.onClickNext.bind(this);
     this.onClickPrevious = this.onClickPrevious.bind(this);
   }
 
-  onClickPrevious() {
-    const { endIndex, startIndex } = this.state;
-    if (startIndex > 1) {
-      this.setState({
-        startIndex: startIndex - 1,
-        endIndex: endIndex - 1,
-        disabledLeft: false,
-        disabledRight: false,
-      });
-    } else if (startIndex > 0) {
-      this.setState({
-        startIndex: startIndex - 1,
-        endIndex: endIndex - 1,
-        disabledRight: false,
-        disabledLeft: true,
-      });
+  onClickNext() {
+    const { index, length } = this.state;
+    if (index === length - 1) {
+      this.setState({ index: 0 });
+    } else {
+      this.setState({ index: index + 1 });
     }
   }
 
-  onClickNext() {
-    const { endIndex, startIndex, cards } = this.state;
-    if (endIndex < cards.length - 1) {
-      this.setState({
-        startIndex: startIndex + 1,
-        endIndex: endIndex + 1,
-        disabledRight: false,
-        disabledLeft: false,
-      });
-    } else if ((endIndex < cards.length)) {
-      this.setState({
-        startIndex: startIndex + 1,
-        endIndex: endIndex + 1,
-        disabledLeft: false,
-        disabledRight: true,
-      });
+  onClickPrevious() {
+    const { index, length } = this.state;
+    if (index === 0) {
+      this.setState({ index: length - 1 });
+    } else {
+      this.setState({ index: index - 1 });
     }
   }
 
   render() {
-    const {
-      cards, endIndex, startIndex, disabledLeft, disabledRight,
-    } = this.state;
+    const { cards, index, length } = this.state;
     return (
       <CarouselContainer
         styles={styles}
         cards={cards}
-        endIndex={endIndex}
-        startIndex={startIndex}
+        index={index}
+        length={length}
         onClickNext={this.onClickNext}
         onClickPrevious={this.onClickPrevious}
-        disabledLeft={disabledLeft}
-        disabledRight={disabledRight}
       />
     );
   }
 }
-
 
 export default CarouselController;
